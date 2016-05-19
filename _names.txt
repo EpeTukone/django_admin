@@ -1,0 +1,4 @@
+vova@mail.tu,Vova
+kolya@mail.ru,kolya
+Kotya@tut.by,Kotya
+drednout@gmail.com,drednout

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>{{ player.nickname }}'s  xp: {{ player_xp }}</h3>
+<h3>{{ player.nickname }}'s  achievements:</h3>
+            <table align="center" border="5" rules="all">
+                    <tr bgcolor="#b2ff80">
+                        <th><a href="{% url 'player_achievement_list' player.id %}" title="Press for see player's achievement list">Achievements</a></th>
+                        <th>Count</th>
+                    </tr>
+                {% for achievement in achievement %}
+                    <tr bgcolor="{% cycle '#B0C4DE' '#F5F5F5' %}">
+                        <td>{{ achievement.achievement__name }}</td>
+                        <td>{{ achievement.count }} </td>
+                    </tr>
+                {% endfor %}
+            </table>
+           <p><form align="center" ction="{% url 'player_achievement' player.id %}" method="post" title="Select the achievement ">
+                {% csrf_token %}
+                {{ form_achievement }}
+                <input type="submit"  value="add achievement" />
+            </form></p>
+<p align="left"><input type="button" value="Back" onClick='location.href="{% url "player_all" %}"'></p>
+
+{% endblock %}

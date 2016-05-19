@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>{{ player.nickname }}'s  xp: {{ player.xp }}</h3>
+<h3>{{ player.nickname }}'s  achievements:</h3>
+            <table align="center" border="5" rules="all">
+                    <tr bgcolor="#b2ff80">
+                        <th>Achievement</th>
+                        <th>Xp</th>
+                        <th>Created</th>
+                    </tr>
+                {% for achievement in achievement %}
+                    <tr bgcolor="{% cycle '#B0C4DE' '#F5F5F5' %}">
+                        <td>{{ achievement.achievement__name }}</td>
+                        <td>{{ achievement.achievement__xp }} </td>
+                        <td>{{ achievement.created }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+<p align="left"><input type="button" value="Back" onClick='location.href="{% url "player_achievement" player.id %}"'></p>
+
+{% endblock %}

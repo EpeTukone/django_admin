@@ -1,0 +1,14 @@
+    {% block stylesheets %}
+            <h2>Ресурс администратора</h2>
+            <hr align="left" size="6">
+            <table align="center" border="6" rules="cols" bgcolor="#4682B4" bordercolor=#b2ff80">
+                <tr>
+                    <td><input type="button" value="Главная" onClick='location.href="http://127.0.0.1:8000/players/home/"'></td>
+                    <td><input type="button" value="Список всех игроков" onClick='location.href="http://127.0.0.1:8000/players/all/"'></td>
+                    <td><input type="button" value="Поиск игроков" onClick='location.href="http://127.0.0.1:8000/players/filter/"'></td>
+                    <td><input type="button" value="Управление опытом игроков" onClick='location.href="http://127.0.0.1:8000/players/xp/"'></td>
+                    <td><input type="button" value="Групповое переименование игроков" onClick='location.href="http://127.0.0.1:8000/admin/"'></td>
+                    <td><input type="button" value="Меню администратора сайта" onClick='location.href="http://127.0.0.1:8000/admin/"'></td>
+                </tr>
+            </table>
+    {% endblock %}

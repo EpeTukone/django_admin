@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Filter players by sessions and experience</h2>
+            <form action="{% url 'player_filter' %}" method="post" title="Enter sessions count">
+                {% csrf_token %}
+                {{ form_filter_session }}
+                <input type="submit" name="filter_session" value="Apply" />
+            </form>
+            <form action="{% url 'player_filter' %}" method="post" title="Enter experience count">
+                {% csrf_token %}
+                {{ form_filter_xp }}
+                <input type="submit" name="filter_xp" value="Apply" />
+            </form>
+            <table align="center" cols="6" border="5" rules="all">
+                    <tr bgcolor="#b2ff80">
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Xp</th>
+                        <th>Created</th>
+                        <th>Updated</th>
+                        <th>Sessions count</th>
+                    </tr>
+                {% for player in player %}
+                    <tr bgcolor="{% cycle '#B0C4DE' '#F5F5F5' %}">
+                        <td align="center">{{ player.id }}</td>
+                        <td align="center">{{ player.nickname }}</td>
+                        <td align="center">{{ player.email }}</td>
+                        <td align="center">{{ player.xp }}</td>
+                        <td align="center">{{ player.created }}</td>
+                        <td align="center">{{ player.updated }}</td>
+                        <td align="center">{{ player.count_session }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <div class="pagination" align="center">
+                    <span class="step-links">
+                    {% if player.has_previous %}
+                        <input type="button" value="Prev" onClick='location.href="?page={{ player.previous_page_number }}"'>
+                    {% endif %}
+
+                    <span class="current">
+                        Page {{ player.number }} of {{ player.paginator.num_pages }}.
+                    </span>
+
+                    {% if player.has_next %}
+                        <input type="button" value="Next" onClick='location.href="?page={{ player.next_page_number }}"'>
+                    {% endif %}
+                </span>
+            </div>
+{% endblock %}

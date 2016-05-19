@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+
+            <h2>The player, whose experience will be changed</h2>
+            <table align="center" border="5" rules="all">
+                    <tr bgcolor="#b2ff80">
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Xp</th>
+                    </tr>
+                    <tr bgcolor="#B0C4DE">
+                        <td>{{ player.id }}</td>
+                        <td>{{ player.nickname }}</td>
+                        <td>{{ player.email }}</td>
+                        <td>{{ player_xp }}</td>
+                    </tr>
+            </table>
+            <br>
+            <form action="{% url 'change_xp' player.id %}" method="post" title="Enter experience count" align="center">
+                {% csrf_token %}
+                {{ form_add }}
+                <input type="submit" name="xp_add" value="Add" />
+                <input type="submit" name="xp_remove" value="Remove" />
+            </form>
+        <h3 align="center">{{ message_value_add }}</h3>
+        <h3 align="center">{{ message_value_remove }}</h3>
+        <p align="left"><input type="button" value="Back" onClick='location.href="{% url "player_all" %}"'></p>
+{% endblock %}

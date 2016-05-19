@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+            <h2>List of Players</h2>
+            <table align="center" cols="6" border="5" rules="all">
+                    <tr bgcolor="#b2ff80">
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Password </th>
+                        <th>Xp</th>
+                        <th>Created</th>
+                        <th>Updated</th>
+                        <th>Achievements</th>
+                    </tr>
+                {% for player in player %}
+                    <tr bgcolor="{% cycle '#B0C4DE' '#F5F5F5' %}">
+                        <td>{{ player.id }}</td>
+                        <td>{{ player.nickname }}</td>
+                        <td>{{ player.email}}</td>
+                        <td> ******** </td>
+                        <td><a href="{% url 'change_xp' player.id %}" title="Click to change">{{ player.xp}}</a></td>
+                        <td>{{ player.created}}</td>
+                        <td>{{ player.updated}}</td>
+                        <td><a href="{% url 'player_achievement' player.id %}" title="Click to see player's achievement">achievements({{player.count}})</a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <div class="pagination" align="center">
+                <span class="step-links">
+                    {% if player.has_previous %}
+                        <input type="button" value="Prev" onClick='location.href="?page={{ player.previous_page_number }}"'>
+                    {% endif %}
+
+                    <span class="current">
+                        Page {{ player.number }} of {{ player.paginator.num_pages }}.
+                    </span>
+
+                    {% if player.has_next %}
+                        <input type="button" value="Next" onClick='location.href="?page={{ player.next_page_number }}"'>
+                    {% endif %}
+                </span>
+            </div>
+            <h2>Player search by email</h2>
+            <form action="{% url 'player_all' %}" method="get" title="Enter email">
+                {{ form }}
+                <input type="submit" value="Search">
+            </form>
+            <h3>{{ message }}</h3>
+{% endblock %}
